@@ -1,0 +1,494 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" x-data="{ theme: localStorage.getItem('tc_theme') || 'dark', showPw: false }" x-init="$watch('theme', v => { localStorage.setItem('tc_theme', v); document.documentElement.setAttribute('data-theme', v) }); document.documentElement.setAttribute('data-theme', theme)">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign In — HanuAI Connect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font: 'Inter', -apple-system, sans-serif;
+  --radius: 24px;
+  --radius-sm: 14px;
+  --radius-xs: 10px;
+}
+
+:root, [data-theme="dark"] {
+  --bg: #06111F;
+  --bg-gradient-start: #06111F;
+  --bg-gradient-end: #020B16;
+  --surface: #082033;
+  --text: #F8FAFC;
+  --text-secondary: #9FB6C9;
+  --text-muted: #6F879A;
+  --border: rgba(0, 229, 255, 0.18);
+  --accent: #00B8D9;
+  --accent-hover: #00B8D9;
+  --accent-light: rgba(0, 229, 255, 0.12);
+  --accent-glow: rgba(0, 229, 255, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] {
+  --bg: #f0f2f5;
+  --bg-gradient-start: #f0f2f5;
+  --bg-gradient-end: #e9edef;
+  --surface: #ffffff;
+  --text: #111b21;
+  --text-secondary: #667781;
+  --text-muted: #8696a0;
+  --border: #e9edef;
+  --accent: #027e5f;
+  --accent-hover: #025e44;
+  --accent-light: rgba(2, 126, 95, 0.08);
+  --accent-glow: rgba(2, 126, 95, 0.10);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+#sky-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 22px;
+  box-shadow: var(--shadow);
+  transition: all 0.25s;
+  z-index: 10;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: rotate(15deg); box-shadow: var(--shadow-lg); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 44px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: var(--shadow-card);
+  transition: background 0.3s, box-shadow 0.3s;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.logo-box {
+  width: 64px;
+  height: 64px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+.logo-img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.brand-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 6px;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+.subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+.form-group { margin-bottom: 22px; }
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+.input-wrap {
+  position: relative;
+}
+.input-wrap i.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 20px;
+  pointer-events: none;
+  transition: color 0.2s;
+  z-index: 2;
+}
+.input-wrap input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  outline: none;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.input-wrap input:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow);
+}
+.input-wrap input:focus + i.input-icon,
+.input-wrap input:focus ~ i.input-icon { color: var(--accent); }
+.input-wrap input::placeholder { color: var(--text-muted); font-weight: 400; }
+
+.pw-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 20px;
+  transition: all 0.15s;
+  z-index: 2;
+}
+.pw-toggle:hover { color: var(--accent); background: var(--accent-light); }
+
+.btn {
+  width: 100%;
+  padding: 15px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-top: 10px;
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.3);
+  letter-spacing: 0.3px;
+}
+.btn:hover { 
+  background: var(--accent-hover); 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 24px rgba(0, 229, 255, 0.4); 
+}
+.btn:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(0, 229, 255, 0.3); }
+
+.error-msg {
+  background: rgba(239, 68, 68, 0.12);
+  color: #EF4444;
+  padding: 14px 18px;
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.error-msg i { font-size: 20px; }
+
+.footer-text {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 32px;
+  font-weight: 400;
+}
+.footer-text strong { 
+  color: var(--accent); 
+  font-weight: 600;
+  cursor: default;
+}
+
+.credits {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-weight: 500;
+}
+.credits span { 
+  cursor: default;
+  padding: 4px 10px;
+  background: var(--bg);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card { animation: fadeInUp 0.7s ease-out; }
+
+@media (max-width: 480px) {
+  .card {
+    padding: 36px 24px;
+    border-radius: 20px;
+  }
+  .logo-box { width: 56px; height: 56px; }
+  .logo-img { width: 42px; height: 42px; }
+  .logo-text .brand-name { font-size: 22px; }
+  h2 { font-size: 22px; }
+  .subtitle { font-size: 14px; margin-bottom: 28px; }
+  .theme-toggle { width: 42px; height: 42px; top: 12px; right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="sky-canvas"></canvas>
+
+<button class="theme-toggle" @click="theme = theme === 'dark' ? 'light' : 'dark'" title="Toggle theme">
+  <i :class="theme === 'dark' ? 'ti ti-sun' : 'ti ti-moon'"></i>
+</button>
+
+<div class="card">
+  <div class="logo">
+    <img src="{{ MEDIA_URL }}chat_images/hanuai-removebg-preview_1.png"
+         alt="Hanu Ai Logo" class="logo-img" />
+    <span class="brand-name">Connect</span>
+  </div>
+  <h2>Welcome back!</h2>
+  <p class="subtitle">Sign in to your workspace</p>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="error-msg"><i class="ti ti-alert-circle"></i> {{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="POST" action="{% url 'login' %}">
+    <input type="hidden" name="_st" id="loginSt" value="" />
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="usernameInput">Username</label>
+      <div class="input-wrap">
+        <i class="ti ti-user input-icon"></i>
+        <input type="text" name="username" id="usernameInput" required placeholder="Enter your username" autocomplete="username" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pwInput">Password</label>
+      <div class="input-wrap">
+        <i class="ti ti-lock input-icon"></i>
+        <input :type="showPw ? 'text' : 'password'" name="password" id="pwInput" required placeholder="Enter your password" autocomplete="current-password" />
+        <button type="button" class="pw-toggle" @click="showPw = !showPw" title="Show password">
+          <i :class="showPw ? 'ti ti-eye-off' : 'ti ti-eye'"></i>
+        </button>
+      </div>
+    </div>
+    <button type="submit" class="btn">Sign In</button>
+  </form>
+
+  <p class="footer-text">
+    Don't have an account? <strong>Contact Admin</strong>
+  </p>
+  <div class="credits">
+    <span>Team v1.0</span>
+    <span>Internal Use</span>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.8/cdn.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+var params = new URLSearchParams(window.location.search);
+var SESSION_TAG = params.get('_st') || '';
+if (SESSION_TAG) document.getElementById('loginSt').value = SESSION_TAG;
+
+(function() {
+  var canvas = document.getElementById('sky-canvas');
+  var THREE = window.THREE;
+  if (!THREE || !canvas) return;
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 2, 12);
+  camera.lookAt(0, 2, 0);
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x87ceeb);
+
+  var topColor = new THREE.Color(0x6bb3d9);
+  var bottomColor = new THREE.Color(0xb4dce8);
+  var skyGeo = new THREE.PlaneGeometry(200, 200);
+  var skyMat = new THREE.ShaderMaterial({
+    uniforms: {
+      topColor: { value: topColor },
+      bottomColor: { value: bottomColor }
+    },
+    vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'uniform vec3 topColor; uniform vec3 bottomColor; varying vec2 vUv; void main() { gl_FragColor = vec4(mix(bottomColor, topColor, vUv.y), 1.0); }',
+    side: THREE.DoubleSide,
+    depthWrite: false
+  });
+  var sky = new THREE.Mesh(skyGeo, skyMat);
+  sky.position.set(0, 10, -50);
+  scene.add(sky);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+  var dirLight = new THREE.DirectionalLight(0xfff5e6, 0.9);
+  dirLight.position.set(10, 20, 10);
+  scene.add(dirLight);
+
+  function createCloud(scale) {
+    var group = new THREE.Group();
+    var mat = new THREE.MeshStandardMaterial({
+      color: 0xf0ebe5,
+      transparent: true,
+      opacity: 0.92,
+      roughness: 1,
+      metalness: 0
+    });
+    var puffs = [
+      { x: 0, y: 0, z: 0, sx: 1.8, sy: 1.0, sz: 1.2 },
+      { x: 1.4, y: 0.15, z: 0.1, sx: 1.5, sy: 0.9, sz: 1.0 },
+      { x: -1.3, y: 0.1, z: -0.1, sx: 1.4, sy: 0.85, sz: 1.1 },
+      { x: 0.6, y: 0.4, z: 0, sx: 1.2, sy: 0.8, sz: 0.9 },
+      { x: -0.5, y: 0.35, z: 0.15, sx: 1.3, sy: 0.75, sz: 1.0 },
+      { x: 2.2, y: 0.05, z: -0.05, sx: 1.0, sy: 0.7, sz: 0.8 },
+      { x: -2.0, y: 0.0, z: 0.05, sx: 1.1, sy: 0.65, sz: 0.9 }
+    ];
+    puffs.forEach(function(p) {
+      var mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), mat);
+      mesh.position.set(p.x, p.y, p.z);
+      mesh.scale.set(p.sx, p.sy, p.sz);
+      group.add(mesh);
+    });
+    group.scale.setScalar(scale);
+    return group;
+  }
+
+  var clouds = [];
+  var configs = [
+    { x: -15, y: 5, z: -8, s: 1.2, spd: 0.1 },
+    { x: 5, y: 7, z: -12, s: 1.5, spd: 0.08 },
+    { x: 18, y: 4, z: -6, s: 1.0, spd: 0.14 },
+    { x: -8, y: 8, z: -15, s: 1.8, spd: 0.06 },
+    { x: 12, y: 6, z: -10, s: 1.3, spd: 0.11 },
+    { x: -20, y: 3, z: -5, s: 0.9, spd: 0.16 },
+    { x: 25, y: 9, z: -18, s: 1.6, spd: 0.07 },
+    { x: -3, y: 6.5, z: -7, s: 1.1, spd: 0.12 },
+    { x: 30, y: 4.5, z: -9, s: 1.4, spd: 0.09 },
+    { x: -25, y: 7.5, z: -14, s: 1.7, spd: 0.05 }
+  ];
+
+  configs.forEach(function(c) {
+    var cloud = createCloud(c.s);
+    cloud.position.set(c.x, c.y, c.z);
+    scene.add(cloud);
+    clouds.push({ group: cloud, baseY: c.y, speed: c.spd, bobOffset: Math.random() * Math.PI * 2, bobSpeed: 0.2 + Math.random() * 0.3 });
+  });
+
+  var clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    var t = clock.getElapsedTime();
+    clouds.forEach(function(c) {
+      c.group.position.x += c.speed * 0.05;
+      c.group.position.y = c.baseY + Math.sin(t * c.bobSpeed + c.bobOffset) * 0.3;
+      if (c.group.position.x > 35) c.group.position.x = -35;
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', function() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+</script>
+</body>
+</html>

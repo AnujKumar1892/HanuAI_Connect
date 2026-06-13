@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HanuAI Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    :root, [data-theme="dark"] {
+      --bg: #06111F; --surface: #082033; --surface2: #0B263A;
+      --text: #F8FAFC; --text-secondary: #9FB6C9; --text-muted: #6F879A;
+      --border: rgba(0, 229, 255, 0.18); --accent: #00B8D9;
+      --accent-light: rgba(0, 229, 255, 0.12);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+    body {
+      font-family: var(--font); background: var(--bg); color: var(--text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; flex-direction: column; gap: 1.5rem; padding: 2rem;
+    }
+    .icon-wrap {
+      width: 80px; height: 80px; border-radius: 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; color: var(--accent); box-shadow: var(--shadow);
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    p { font-size: 0.95rem; color: var(--text-muted); text-align: center; max-width: 360px; line-height: 1.6; }
+    a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 12px;
+      background: var(--accent); color: #fff; font-weight: 600;
+      font-size: 14px; text-decoration: none; font-family: var(--font);
+      transition: all 0.2s; box-shadow: 0 4px 12px rgba(0, 184, 217, 0.3);
+    }
+    a:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 184, 217, 0.4); }
+  </style>
+</head>
+<body>
+  <div class="icon-wrap"><i class="ti ti-message-2-off"></i></div>
+  <h1>No channels yet</h1>
+  <p>Create a channel from the admin panel to get started with HanuAI Connect.</p>
+  <a href="/admin/"><i class="ti ti-settings"></i> Go to Admin</a>
+</body>
+</html>

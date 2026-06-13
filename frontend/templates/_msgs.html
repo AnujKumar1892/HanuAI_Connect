@@ -1,0 +1,75 @@
+{% for msg in messages %}
+<div class="msg-row {% if msg.sender == request.user %}self{% endif %}{% if request.user in msg.mentioned_users.all %} mentioned{% endif %}" data-message-id="{{ msg.id }}" data-sender-id="{{ msg.sender.id }}" data-created-at="{{ msg.created_at|date:'c' }}"{% if msg.reply_to_id %} data-reply-to-id="{{ msg.reply_to_id }}"{% endif %}>
+  {% if msg.sender != request.user %}
+  <div class="msg-av-wrap">
+    <div class="av {% if msg.sender.role == 'admin' %}av-a{% elif msg.sender.role == 'management' %}av-m{% else %}av-u{% endif %} msg-av">{{ msg.sender.username|first|upper }}</div>
+  </div>
+  {% endif %}
+  <div class="msg-body">
+    <button class="msg-arrow-btn"><i class="ti ti-chevron-down"></i></button>
+    <div class="msg-meta">
+      <span class="msg-sender" style="color:{% if msg.sender.role == 'admin' %}var(--admin-color){% elif msg.sender.role == 'management' %}var(--mgmt-color){% else %}var(--accent){% endif %}">{{ msg.sender.username }}</span>
+      <span class="msg-time">{{ msg.created_at|date:'h:i A' }}</span>
+      {% if msg.is_edited %}<span class="edited-tag"> edited</span>{% endif %}
+    </div>
+    <div class="bubble {% if msg.is_broadcast %}bc{% endif %} {% if msg.sender == request.user %}self{% endif %}">
+      {% if msg.is_broadcast %}
+      <div class="bc-tag"><i class="ti ti-speakerphone"></i> Broadcast</div>
+      {% endif %}
+      {% if msg.reply_to and not msg.reply_to.is_deleted_for_everyone %}
+      <div class="reply-quote">
+        <span class="reply-quote-sender">{{ msg.reply_to.sender.username }}</span>
+        <span class="reply-quote-text">{{ msg.reply_to.message|truncatechars:80 }}</span>
+      </div>
+      {% endif %}
+      {% if msg.message %}<div class="msg-text">{{ msg.message }}</div>{% endif %}
+      {% if msg.image %}
+        <img class="img-preview" src="{{ msg.image.url }}" onclick="window.open('{{ msg.image.url }}')" />
+      {% elif msg.file %}
+        <div class="file-attach" onclick="window.open('{{ msg.file.url }}')">
+          <div class="file-icon"><i class="ti ti-file-text"></i></div>
+          <div class="file-info">
+            <div class="file-name">{{ msg.file.name|truncatechars:30 }}</div>
+            <div class="file-size">Click to download</div>
+          </div>
+          <i class="ti ti-download file-dl"></i>
+        </div>
+      {% endif %}
+    </div>
+    <div class="msg-reactions" id="react-{{ msg.id }}"></div>
+    <div class="msg-footer">
+      {% if msg.sender == request.user %}
+      <span class="msg-read-status"><i class="ti ti-checks"></i></span>
+      {% endif %}
+      <i class="ti ti-star msg-star" id="star-{{ msg.id }}"></i>
+    </div>
+    <div class="msg-menu-dropdown">
+      <div class="msg-menu-item" data-action="reply"><i class="ti ti-arrow-back-up"></i> Reply</div>
+      <div class="msg-menu-item" data-action="copy"><i class="ti ti-copy"></i> Copy</div>
+      <div class="msg-menu-item" data-action="react"><i class="ti ti-mood-smile"></i> React</div>
+      <div class="msg-menu-item" data-action="forward"><i class="ti ti-arrow-forward-up"></i> Forward</div>
+      <div class="msg-menu-divider"></div>
+      {% if msg.sender == request.user and not msg.is_broadcast %}
+      <div class="msg-menu-item" data-action="edit"><i class="ti ti-edit"></i> Edit</div>
+      {% endif %}
+      <div class="msg-menu-item" data-action="pin"><i class="ti ti-pin"></i> Pin</div>
+      <div class="msg-menu-item" data-action="star"><i class="ti ti-star"></i> Star</div>
+      {% if not msg.is_broadcast %}
+      <div class="msg-menu-divider"></div>
+      <div class="msg-menu-item danger" data-action="delete"><i class="ti ti-trash"></i> Delete</div>
+      {% endif %}
+    </div>
+  </div>
+  {% if msg.sender == request.user %}
+  <div class="msg-av-wrap self-av">
+    <div class="av {% if msg.sender.role == 'admin' %}av-a{% elif msg.sender.role == 'management' %}av-m{% else %}av-u{% endif %} msg-av">{{ msg.sender.username|first|upper }}</div>
+  </div>
+  {% endif %}
+</div>
+{% empty %}
+<div class="empty-state">
+  <i class="ti ti-message-2-off"></i>
+  <h3>No messages yet</h3>
+  <p>Be the first to start a conversation</p>
+</div>
+{% endfor %}

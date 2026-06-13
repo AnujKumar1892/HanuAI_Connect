@@ -1,0 +1,156 @@
+{
+    "Anomalies": [
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:53:37",
+            "Anomaly type": "C&D Waste",
+            "Frame no.": "",
+            "Latitude": 20.33067367741692,
+            "Longitude": 85.8060070889362,
+            "Distance from start point in meters": "51.85619200158651",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_1.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:55:23",
+            "Anomaly type": "C&D Waste",
+            "Frame no.": "",
+            "Latitude": 20.336648861970456,
+            "Longitude": 85.80681606841902,
+            "Distance from start point in meters": "718.8479476724384",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_10.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:55:26",
+            "Anomaly type": "Dust",
+            "Frame no.": "",
+            "Latitude": 20.336828501911437,
+            "Longitude": 85.80683633908663,
+            "Distance from start point in meters": "739.8479476734875",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_11.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:53:47",
+            "Anomaly type": "C&D Waste",
+            "Frame no.": "",
+            "Latitude": 20.33123701221768,
+            "Longitude": 85.80608942840152,
+            "Distance from start point in meters": "114.85172077965252",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_2.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:54:10",
+            "Anomaly type": "Minor Pothole",
+            "Frame no.": "",
+            "Latitude": 20.33270586044033,
+            "Longitude": 85.80629159587012,
+            "Distance from start point in meters": "280.8505476959113",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_3.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:54:28",
+            "Anomaly type": "Garbage",
+            "Frame no.": "",
+            "Latitude": 20.333870370889965,
+            "Longitude": 85.80645134001998,
+            "Distance from start point in meters": "409.85022133326714",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_4.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:54:34",
+            "Anomaly type": "Manhole",
+            "Frame no.": "",
+            "Latitude": 20.334210180235317,
+            "Longitude": 85.80650232842895,
+            "Distance from start point in meters": "445.84861684896623",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_5.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:54:48",
+            "Anomaly type": "Garbage",
+            "Frame no.": "",
+            "Latitude": 20.334632027743712,
+            "Longitude": 85.80655268577922,
+            "Distance from start point in meters": "492.848615982638",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_6.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:55:08",
+            "Anomaly type": "C&D Waste",
+            "Frame no.": "",
+            "Latitude": 20.33564585556742,
+            "Longitude": 85.80667682909458,
+            "Distance from start point in meters": "609.8484631534867",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_7.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:55:17",
+            "Anomaly type": "Dust",
+            "Frame no.": "",
+            "Latitude": 20.33629921192267,
+            "Longitude": 85.80677115760795,
+            "Distance from start point in meters": "680.8482950199514",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_8.png"
+        },
+        {
+            "Anomaly number": "1",
+            "Timestamp on processed video": "12/06/2025 04:55:19",
+            "Anomaly type": "Patch",
+            "Frame no.": "",
+            "Latitude": 20.33642431203573,
+            "Longitude": 85.8067907301504,
+            "Distance from start point in meters": "693.847947673971",
+            "Length in meters": "",
+            "Width in meters": "",
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/mcbhubneshwar/pavement/anomalies/frames/survey_3/road_17/frame_9.png"
+        },
+        {
+            "Anomaly number": "0.11",
+            "Timestamp on processed video": "2025-12-06 16:54:37",
+            "Anomaly type": "Water Logging",
+            "Frame no.": "0-2191-11",
+            "Latitude": 20.33433571669168,
+            "Longitude": 85.80651831445365,
+            "Distance from start point in meters": 454.8486168479392,
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/frames/roadathena/mcbhubneshwar/survey_1/road_17/0-2191-11.jpg"
+        },
+        {
+            "Anomaly number": "0.13",
+            "Timestamp on processed video": "2025-12-06 16:54:39",
+            "Anomaly type": "Major Pothole",
+            "Frame no.": "0-2259-13",
+            "Latitude": 20.334416517747748,
+            "Longitude": 85.80652779684739,
+            "Distance from start point in meters": 463.8486168485028,
+            "image": "https://raiotransection.s3.ap-south-1.amazonaws.com/output/frames/roadathena/mcbhubneshwar/survey_1/road_17/0-2259-13.jpg"
+        }
+    ]
+}
