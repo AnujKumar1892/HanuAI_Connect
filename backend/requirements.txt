@@ -1,0 +1,11 @@
+# Project requirements pinned from the active virtual environment
+Django==6.0.6
+asgiref==3.11.1
+sqlparse==0.5.5
+Pillow==12.2.0
+
+daphne==4.2.2
+channels==4.3.2
+djangorestframework==3.17.1
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.9.0

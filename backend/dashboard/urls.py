@@ -1,0 +1,32 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('login/', views.login_view, name='login'),
+    path('', views.dashboard_home, name='dashboard_home'),
+    path('logout/', views.logout_view, name='logout'),
+    path('channel/create/', views.create_channel, name='create_channel'),
+    path('channel/edit/<slug:slug>/', views.edit_channel, name='edit_channel'),
+    path('channel/archive/<slug:slug>/', views.archive_channel, name='archive_channel'),
+    path('channel/unarchive/<slug:slug>/', views.unarchive_channel, name='unarchive_channel'),
+    path('channel/delete/<slug:slug>/', views.delete_channel, name='delete_channel'),
+    path('channel/restore/<slug:slug>/', views.restore_channel, name='restore_channel'),
+    path('channel/permanent-delete/<slug:slug>/', views.permanent_delete_channel, name='permanent_delete_channel'),
+    path('channel/manage-users/<slug:slug>/', views.manage_channel_users, name='manage_channel_users'),
+    path('channel/<slug:slug>/users/', views.channel_users_api, name='channel_users_api'),
+    path('channel/<slug:slug>/', views.channel_detail, name='channel_detail'),
+    path('broadcast/', views.broadcast_message, name='broadcast_message'),
+    path('upload/', views.upload_file, name='upload_file'),
+    path('message/delete-for-me/<int:message_id>/', views.delete_for_me, name='delete_for_me'),
+    path('message/delete-for-everyone/<int:message_id>/', views.delete_for_everyone, name='delete_for_everyone'),
+    path('message/edit/<int:message_id>/', views.edit_message, name='edit_message'),
+    path('history/', views.message_history_api, name='message_history_api'),
+    path('notifications/', views.notifications_api, name='notifications_api'),
+    path('notifications/mark-read/', views.mark_notifications_read, name='mark_notifications_read'),
+    path('notifications/clear/', views.clear_notifications, name='clear_notifications'),
+    path('profile/update/', views.update_profile, name='update_profile'),
+    path('profile/upload-pic/', views.update_profile, name='upload_profile_pic'),
+    path('channel/upload-pic/<slug:slug>/', views.upload_channel_pic, name='upload_channel_pic'),
+    path('channel/<slug:slug>/shared/', views.channel_shared_content, name='channel_shared_content'),
+    path('send-announcement/', views.send_announcement, name='send_announcement'),
+]
